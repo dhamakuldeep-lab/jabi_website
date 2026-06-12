@@ -68,7 +68,7 @@ export default {
     if (!apiResp.ok) {
       const errText = await apiResp.text();
       const k = env.ANTHROPIC_API_KEY || "";
-      const keyInfo = k ? ("starts:" + k.trim().slice(0, 11) + " len:" + k.trim().length) : "SECRET MISSING";
+      const keyInfo = (k ? ("starts:" + k.trim().slice(0, 11) + " len:" + k.trim().length) : "SECRET MISSING") + " | env has: [" + Object.keys(env).join(", ") + "]";
       return new Response(JSON.stringify({ reply: "Sorry, I'm having trouble right now. Please use the contact form or WhatsApp +91 96255 80114. [debug " + apiResp.status + " | key " + keyInfo + " | " + errText.slice(0, 200) + "]" }),
         { headers: { ...cors, "Content-Type": "application/json" } });
     }
