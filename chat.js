@@ -56,7 +56,7 @@
     }).then(function (r) { return r.json(); }).then(function (d) {
       var reply = (d.reply || "Sorry, something went wrong. Please try again.").replace(/\*\*/g, "");
       wait.textContent = reply; hist.push({ role: "assistant", content: reply });
-      box.scrollTop = Math.max(0, wait.offsetTop - 12);
+      wait.scrollIntoView({ block: "start", behavior: "auto" });
     }).catch(function () {
       wait.textContent = "Connection problem — please try again, or WhatsApp us at +91 96255 80114.";
     }).finally(function () { busy = false; });
