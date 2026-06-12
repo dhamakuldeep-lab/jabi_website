@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact Jabi Intelligents | Book an AI Workshop</title>
+<meta name="description" content="Contact Jabi Intelligents to book an AI workshop, faculty development program or internship for your institution or company. Email, phone and WhatsApp.">
+<meta name="author" content="Jabi Intelligents Private Limited">
+<meta name="keywords" content="book AI workshop, AI workshop enquiry, contact Jabi Intelligents, AI training booking, FDP booking">
+<meta name="robots" content="index, follow">
+<meta name="geo.region" content="IN-UP">
+<meta name="geo.placename" content="Noida">
+<link rel="canonical" href="https://jabiintelligents.com/contact.html">
+<meta property="og:url" content="https://jabiintelligents.com/contact.html">
+<meta property="og:image" content="https://jabiintelligents.com/jabiLogo.png">
+<meta property="og:site_name" content="Jabi Intelligents">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <a class="logo" href="index.html"><img class="nav-logo-img" src="jabiLogo.png" alt="Jabi Intelligents Private Limited"></a>
+      <div class="navlinks">
+        <a href="index.html">Home</a>
+        <a href="programs.html">Programs</a>
+        <a href="index.html#products">Products</a>
+        <a href="internship.html">Internships</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <a class="nav-cta" href="contact.html">Book a Workshop</a>
+      <button class="menu-btn" aria-label="Menu" onclick="this.closest('nav').querySelector('.navlinks').classList.toggle('open')">&#9776;</button>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <span class="eyebrow">Contact</span>
+    <h1>Let's bring industry-grade AI to your <span class="grad-text">campus or team</span>.</h1>
+    <p>Tell us what you need and we'll respond within one working day with an agenda, available dates and a quote.</p>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap contact-grid">
+    <div class="contact-info">
+      <h2 style="font-size:1.7rem;margin-bottom:10px">Get in touch</h2>
+      <div class="item"><b>Email</b><span><a href="mailto:contact@jabiintelligents.com">contact@jabiintelligents.com</a></span></div>
+      <div class="item"><b>Phone</b><span><a href="tel:+919625580114">+91 96255 80114</a></span></div>
+      <div class="item"><b>WhatsApp</b><span><a href="https://wa.me/919625580114">Chat on WhatsApp</a></span></div>
+      <div class="item"><b>Office</b><span>Grovy Optiva, Block-A, Sector-68, Noida, Uttar Pradesh &ndash; 201301</span></div>
+      <div class="item"><b>Company</b><span>Jabi Intelligents Private Limited</span></div>
+    </div>
+    <div>
+      <div class="leadform" style="grid-template-columns:1fr;padding:36px">
+        <div>
+          <h2 style="font-size:1.6rem;margin-bottom:6px">Send an enquiry</h2>
+          <p style="margin-bottom:18px">Fill this in and we'll get back to you quickly.</p>
+          <form id="enq" onsubmit="return sendWhatsApp(event)">
+            <input id="f_name" type="text" placeholder="Your name" required>
+            <input id="f_org" type="text" placeholder="Institution / Company" required>
+            <input id="f_email" type="email" placeholder="Email" required>
+            <input id="f_phone" type="tel" placeholder="Phone / WhatsApp" required>
+            <select id="f_prog" required>
+              <option value="">Select a program&hellip;</option>
+              <option>AI in Healthcare (Pharmacy)</option>
+              <option>AI for Industry 4.0 (Engineering/Corporate/ITI/Polytechnic)</option>
+              <option>AI for Engineering Students</option>
+              <option>AI for School Teachers</option>
+              <option>AI for Management</option>
+              <option>Corporate Leadership Development</option>
+              <option>Faculty Development Program</option>
+              <option>Medical Coding &amp; Billing</option>
+              <option>Life &amp; Leadership Coaching</option>
+              <option>Real-Project Internship</option>
+              <option>Sukhverse (product enquiry)</option>
+            </select>
+            <textarea id="f_msg" rows="3" placeholder="Approx. number of participants, preferred dates, anything else"></textarea>
+            <button class="btn btn-primary" type="submit">&#128172; Send on WhatsApp</button>
+            <a class="btn btn-ghost" href="#" style="text-align:center" onclick="return sendEmail()">Or send by Email</a>
+          </form>
+          <script>
+            function vals(){
+              return {
+                name:document.getElementById('f_name').value,
+                org:document.getElementById('f_org').value,
+                email:document.getElementById('f_email').value,
+                phone:document.getElementById('f_phone').value,
+                prog:document.getElementById('f_prog').value,
+                msg:document.getElementById('f_msg').value
+              };
+            }
+            function sendEmail(){
+              var v=vals();
+              var subject="Workshop Enquiry - "+(v.prog||"General")+" - "+v.org;
+              var body="Name: "+v.name+"%0D%0AInstitution/Company: "+v.org+"%0D%0AEmail: "+v.email
+                +"%0D%0APhone: "+v.phone+"%0D%0AProgram: "+v.prog+"%0D%0A%0D%0ADetails: "+v.msg;
+              window.location.href="mailto:contact@jabiintelligents.com?subject="
+                +encodeURIComponent(subject)+"&body="+body;
+              return false;
+            }
+            function sendWhatsApp(e){
+              if(e) e.preventDefault();
+              var form=document.getElementById('enq');
+              if(form && !form.checkValidity()){ form.reportValidity(); return false; }
+              var v=vals();
+              var text="*Workshop Enquiry*%0A"
+                +"Name: "+v.name+"%0A"+"Institution/Company: "+v.org+"%0A"
+                +"Email: "+v.email+"%0A"+"Phone: "+v.phone+"%0A"+"Program: "+v.prog+"%0A"
+                +"Details: "+v.msg;
+              window.open("https://wa.me/919625580114?text="+text,"_blank");
+              return false;
+            }
+          </script>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <img class="footer-logo-img" src="jabiLogo.png" alt="Jabi Intelligents">
+        <p>Industry-grade AI workshops, live projects and internships for students, faculty and industry across India.</p>
+      </div>
+      <div>
+        <h4>Programs</h4>
+        <a href="pharmacy-ai.html">AI in Healthcare</a>
+        <a href="engineering-ai.html">AI for Industry 4.0</a>
+        <a href="engineering-students.html">AI for Engineering Students</a>
+        <a href="school-teachers.html">AI for School Teachers</a>
+        <a href="management-ai.html">AI for Management</a>
+        <a href="faculty-development.html">Faculty Development</a>
+        <a href="medical-coding.html">Medical Coding &amp; Billing</a>
+        <a href="life-coaching.html">Life &amp; Leadership Coaching</a>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <a href="about.html">About</a>
+        <a href="internship.html">Internships</a>
+        <a href="index.html#products">Products (Sukhverse)</a>
+        <a href="contact.html">Book a Workshop</a>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <a href="mailto:contact@jabiintelligents.com">contact@jabiintelligents.com</a>
+        <a href="tel:+919625580114">+91 96255 80114</a>
+        <a>Sector-68, Noida, UP &ndash; 201301</a>
+      </div>
+    </div>
+    <div class="copyright">&copy; 2026 Jabi Intelligents Private Limited. All rights reserved.</div>
+  </div>
+</footer>
+<a class="wa" href="https://wa.me/919625580114" aria-label="WhatsApp">&#128172;</a>
+
+</body>
+</html>
