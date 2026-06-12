@@ -21,9 +21,9 @@
   ].join("\n");
   var st = document.createElement("style"); st.textContent = css; document.head.appendChild(st);
 
-  var btn = document.createElement("button"); btn.id = "jbt"; btn.textContent = "🤖 Ask Jabi AI";
+  var btn = document.createElement("button"); btn.id = "jbt"; btn.textContent = "🤖 Ask Jabi Guru";
   var panel = document.createElement("div"); panel.id = "jbp";
-  panel.innerHTML = '<div id="jbh"><span>Jabi AI Assistant</span><button aria-label="Close">✕</button></div><div id="jbm"></div><div id="jbf"><input id="jbi" placeholder="Type your question here…" maxlength="500"><button id="jbs">Send</button></div>';
+  panel.innerHTML = '<div id="jbh"><span>Jabi Guru</span><button aria-label="Close">✕</button></div><div id="jbm"></div><div id="jbf"><input id="jbi" placeholder="Type your question here…" maxlength="500"><button id="jbs">Send</button></div>';
   document.body.appendChild(btn); document.body.appendChild(panel);
 
   var hist = [], busy = false;
@@ -37,7 +37,7 @@
   function toggle() {
     panel.classList.toggle("open");
     if (panel.classList.contains("open") && !hist.length) {
-      add("assistant", "Namaste! I'm Jabi AI. Ask me anything about our AI workshops, internships, FDPs or how to book one for your campus or team.");
+      add("assistant", "Namaste! I'm Jabi Guru, your AI guide. Ask me anything about our AI workshops, internships, FDPs or how to book one for your campus or team.");
     }
     if (panel.classList.contains("open")) inp.focus();
   }
