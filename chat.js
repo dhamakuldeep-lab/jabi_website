@@ -1,6 +1,6 @@
 /* Jabi AI chat widget. Set WORKER_URL to your Cloudflare Worker URL to enable. */
 (function () {
-  var WORKER_URL = "REPLACE_WITH_WORKER_URL";
+  var WORKER_URL = "https://jabi-ai.dhama-kuldeep.workers.dev";
   if (WORKER_URL.indexOf("REPLACE") === 0) return; // disabled until configured
 
   var css = [
