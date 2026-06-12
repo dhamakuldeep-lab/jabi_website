@@ -86,24 +86,9 @@
             </select>
             <textarea id="f_msg" name="Details" rows="3" placeholder="Approx. number of participants, preferred dates, anything else"></textarea>
             <button class="btn btn-primary" type="submit">Send Message</button>
-            <a class="btn btn-ghost" href="#" style="text-align:center" onclick="return sendWhatsApp()">Or send on WhatsApp</a>
           </form>
           <script>
-            function vals(){
-              return {
-                name:document.getElementById('f_name').value,
-                org:document.getElementById('f_org').value,
-                email:document.getElementById('f_email').value,
-                phone:document.getElementById('f_phone').value,
-                prog:document.getElementById('f_prog').value,
-                msg:document.getElementById('f_msg').value
-              };
-            }
-            function sendWhatsApp(e){
-              if(e) e.preventDefault();
-              var form=document.getElementById('enq');
-              if(form && !form.checkValidity()){ form.reportValidity(); return false; }
-              var v=vals();
+                          var v=vals();
               var text="*Workshop Enquiry*%0A"
                 +"Name: "+v.name+"%0A"+"Institution/Company: "+v.org+"%0A"
                 +"Email: "+v.email+"%0A"+"Phone: "+v.phone+"%0A"+"Program: "+v.prog+"%0A"
