@@ -23,7 +23,7 @@
 
   var btn = document.createElement("button"); btn.id = "jbt"; btn.textContent = "🤖 Ask Jabi AI";
   var panel = document.createElement("div"); panel.id = "jbp";
-  panel.innerHTML = '<div id="jbh"><span>Jabi AI Assistant</span><button aria-label="Close">✕</button></div><div id="jbm"></div><div id="jbf"><input id="jbi" placeholder="Ask about our workshops…" maxlength="500"><button id="jbs">Send</button></div>';
+  panel.innerHTML = '<div id="jbh"><span>Jabi AI Assistant</span><button aria-label="Close">✕</button></div><div id="jbm"></div><div id="jbf"><input id="jbi" placeholder="Type your question here…" maxlength="500"><button id="jbs">Send</button></div>';
   document.body.appendChild(btn); document.body.appendChild(panel);
 
   var hist = [], busy = false;
