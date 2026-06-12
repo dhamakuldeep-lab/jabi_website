@@ -69,7 +69,7 @@ export default {
       const errText = await apiResp.text();
       const k = env.ANTHROPIC_API_KEY || "";
       const keyInfo = k ? ("starts:" + k.trim().slice(0, 11) + " len:" + k.trim().length) : "SECRET MISSING";
-      return new Response(JSON.stringify({ reply: "Sorry, I'm having trouble right now. Please use the contact form or WhatsApp +91 96255 80114. [debug " + apiResp.status + ": " + errText.slice(0, 300) + "]" }),
+      return new Response(JSON.stringify({ reply: "Sorry, I'm having trouble right now. Please use the contact form or WhatsApp +91 96255 80114. [debug " + apiResp.status + " | key " + keyInfo + " | " + errText.slice(0, 200) + "]" }),
         { headers: { ...cors, "Content-Type": "application/json" } });
     }
     const data = await apiResp.json();
