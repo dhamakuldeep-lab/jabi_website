@@ -78,13 +78,21 @@
   function speak(text) {
     if (!voiceOn || !window.speechSynthesis) return;
     speechSynthesis.cancel();
-    var u = new SpeechSynthesisUtterance(text);
+    var clean = text
+      .replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}\u{200D}\u{2B00}-\u{2BFF}]/gu, "")
+      .replace(/\s+/g, " ").trim();
+    if (!clean) return;
+    var u = new SpeechSynthesisUtterance(clean);
     var voices = speechSynthesis.getVoices();
-    var hasDevanagari = /[\u0900-\u097F]/.test(text);
-    var pick = voices.find(function (v) { return hasDevanagari ? v.lang.indexOf("hi") === 0 : v.lang.indexOf("en-IN") === 0; }) ||
+    var hasDevanagari = /[\u0900-\u097F]/.test(clean);
+    var lang = hasDevanagari ? "hi" : "en-IN";
+    var female = /heera|swara|neerja|kalpana|priya|veena|lekha|female|woman/i;
+    var pick = voices.find(function (v) { return v.lang.indexOf(lang) === 0 && female.test(v.name); }) ||
+               voices.find(function (v) { return v.lang.indexOf(lang) === 0; }) ||
+               voices.find(function (v) { return female.test(v.name) && v.lang.indexOf("en") === 0; }) ||
                voices.find(function (v) { return v.lang.indexOf("en") === 0; });
     if (pick) u.voice = pick;
-    u.rate = 1; speechSynthesis.speak(u);
+    u.rate = 1; u.pitch = 1.05; speechSynthesis.speak(u);
   }
 
   // --- Voice input (mic) ---
