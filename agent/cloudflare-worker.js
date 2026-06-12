@@ -58,7 +58,7 @@ export default {
         "content-type": "application/json"
       },
       body: JSON.stringify({
-        model: "claude-haiku-4-5",
+        model: "claude-haiku-4-5-20251001",
         max_tokens: 400,
         system: [{ type: "text", text: SYSTEM_PROMPT, cache_control: { type: "ephemeral" } }],
         messages
@@ -66,7 +66,8 @@ export default {
     });
 
     if (!apiResp.ok) {
-      return new Response(JSON.stringify({ reply: "Sorry, I'm having trouble right now. Please use the contact form or WhatsApp +91 96255 80114." }),
+      const errText = await apiResp.text();
+      return new Response(JSON.stringify({ reply: "Sorry, I'm having trouble right now. Please use the contact form or WhatsApp +91 96255 80114. [debug " + apiResp.status + ": " + errText.slice(0, 300) + "]" }),
         { headers: { ...cors, "Content-Type": "application/json" } });
     }
     const data = await apiResp.json();
