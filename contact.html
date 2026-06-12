@@ -61,12 +61,16 @@
         <div>
           <h2 style="font-size:1.6rem;margin-bottom:6px">Send an enquiry</h2>
           <p style="margin-bottom:18px">Fill this in and we'll get back to you quickly.</p>
-          <form id="enq" onsubmit="return sendWhatsApp(event)">
-            <input id="f_name" type="text" placeholder="Your name" required>
-            <input id="f_org" type="text" placeholder="Institution / Company" required>
-            <input id="f_email" type="email" placeholder="Email" required>
-            <input id="f_phone" type="tel" placeholder="Phone / WhatsApp" required>
-            <select id="f_prog" required>
+          <form id="enq" action="https://formsubmit.co/dhama.kuldeep@gmail.com" method="POST">
+            <input type="hidden" name="_subject" value="Website Enquiry - Jabi Intelligents">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="https://dhamakuldeep-lab.github.io/jabi_website/contact.html?sent=1">
+            <input id="f_name" name="Name" type="text" placeholder="Your name" required>
+            <input id="f_org" name="Institution / Company" type="text" placeholder="Institution / Company" required>
+            <input id="f_email" name="Email" type="email" placeholder="Email" required>
+            <input id="f_phone" name="Phone / WhatsApp" type="tel" placeholder="Phone / WhatsApp" required>
+            <select id="f_prog" name="Program" required>
               <option value="">Select a program&hellip;</option>
               <option>AI in Healthcare (Pharmacy)</option>
               <option>AI for Industry 4.0 (Engineering/Corporate/ITI/Polytechnic)</option>
@@ -80,9 +84,9 @@
               <option>Real-Project Internship</option>
               <option>Sukhverse (product enquiry)</option>
             </select>
-            <textarea id="f_msg" rows="3" placeholder="Approx. number of participants, preferred dates, anything else"></textarea>
-            <button class="btn btn-primary" type="submit">&#128172; Send on WhatsApp</button>
-            <a class="btn btn-ghost" href="#" style="text-align:center" onclick="return sendEmail()">Or send by Email</a>
+            <textarea id="f_msg" name="Details" rows="3" placeholder="Approx. number of participants, preferred dates, anything else"></textarea>
+            <button class="btn btn-primary" type="submit">Send Message</button>
+            <a class="btn btn-ghost" href="#" style="text-align:center" onclick="return sendWhatsApp()">Or send on WhatsApp</a>
           </form>
           <script>
             function vals(){
@@ -95,15 +99,6 @@
                 msg:document.getElementById('f_msg').value
               };
             }
-            function sendEmail(){
-              var v=vals();
-              var subject="Workshop Enquiry - "+(v.prog||"General")+" - "+v.org;
-              var body="Name: "+v.name+"%0D%0AInstitution/Company: "+v.org+"%0D%0AEmail: "+v.email
-                +"%0D%0APhone: "+v.phone+"%0D%0AProgram: "+v.prog+"%0D%0A%0D%0ADetails: "+v.msg;
-              window.location.href="mailto:contact@jabiintelligents.com?subject="
-                +encodeURIComponent(subject)+"&body="+body;
-              return false;
-            }
             function sendWhatsApp(e){
               if(e) e.preventDefault();
               var form=document.getElementById('enq');
@@ -115,6 +110,15 @@
                 +"Details: "+v.msg;
               window.open("https://wa.me/919625580114?text="+text,"_blank");
               return false;
+            }
+            if(new URLSearchParams(location.search).get('sent')){
+              var lf=document.querySelector('.leadform');
+              if(lf){
+                var note=document.createElement('div');
+                note.style.cssText='background:rgba(0,224,164,.12);border:1px solid #00e0a4;color:#00e0a4;padding:14px 18px;border-radius:11px;font-weight:700;margin-bottom:16px';
+                note.textContent='Thank you! Your message has been sent. We will get back to you within one working day.';
+                lf.insertBefore(note, lf.firstChild);
+              }
             }
           </script>
         </div>
