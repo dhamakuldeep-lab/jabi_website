@@ -9,7 +9,7 @@
     "#jbp.open{display:flex}",
     "#jbh{background:linear-gradient(120deg,#00e0a4,#0bb4ff);color:#04121a;padding:14px 18px;font-weight:800;display:flex;justify-content:space-between;align-items:center}",
     "#jbh button{background:none;border:0;font-size:1.2rem;cursor:pointer;color:#04121a;font-weight:800}",
-    "#jbm{flex:1;overflow-y:auto;overflow-x:hidden;padding:14px;display:flex;flex-direction:column;gap:10px}",
+    "#jbm{position:relative;flex:1;overflow-y:auto;overflow-x:hidden;padding:14px;display:flex;flex-direction:column;gap:10px}",
     ".jb-msg{max-width:85%;padding:10px 14px;border-radius:14px;font-size:.92rem;line-height:1.5;white-space:pre-wrap}",
     ".jb-ai{background:#1a2236;color:#eef2fb;align-self:flex-start;border-bottom-left-radius:4px}",
     ".jb-me{background:linear-gradient(120deg,#00e0a4,#0bb4ff);color:#04121a;align-self:flex-end;border-bottom-right-radius:4px;font-weight:600}",
