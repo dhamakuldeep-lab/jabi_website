@@ -53,7 +53,7 @@ export default {
     const apiResp = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
       headers: {
-        "x-api-key": env.ANTHROPIC_API_KEY,
+        "x-api-key": (env.ANTHROPIC_API_KEY || "").trim(),
         "anthropic-version": "2023-06-01",
         "content-type": "application/json"
       },
@@ -67,6 +67,8 @@ export default {
 
     if (!apiResp.ok) {
       const errText = await apiResp.text();
+      const k = env.ANTHROPIC_API_KEY || "";
+      const keyInfo = k ? ("starts:" + k.trim().slice(0, 11) + " len:" + k.trim().length) : "SECRET MISSING";
       return new Response(JSON.stringify({ reply: "Sorry, I'm having trouble right now. Please use the contact form or WhatsApp +91 96255 80114. [debug " + apiResp.status + ": " + errText.slice(0, 300) + "]" }),
         { headers: { ...cors, "Content-Type": "application/json" } });
     }
