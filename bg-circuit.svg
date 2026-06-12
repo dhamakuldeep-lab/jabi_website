@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <linearGradient id="o" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ff7a1a"/><stop offset="1" stop-color="#ffb347"/>
+    </linearGradient>
+    <linearGradient id="b" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#0bb4ff"/><stop offset="1" stop-color="#00e0a4"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke-linecap="round">
+    <!-- top-right orange circuit cluster -->
+    <g stroke="url(#o)" stroke-width="7" opacity="0.5">
+      <path d="M1600 120 H1280 V230 H1120"/>
+      <path d="M1600 200 H1380"/>
+      <path d="M1600 60 H1180"/>
+      <path d="M1340 60 V160"/>
+    </g>
+    <g fill="#ff8a3c" stroke="none" opacity="0.55">
+      <circle cx="1120" cy="230" r="13"/><circle cx="1380" cy="200" r="13"/>
+      <circle cx="1180" cy="60" r="13"/><circle cx="1340" cy="160" r="13"/>
+    </g>
+    <!-- bottom-left blue/teal circuit cluster -->
+    <g stroke="url(#b)" stroke-width="7" opacity="0.4">
+      <path d="M0 760 H260 V650 H420"/>
+      <path d="M0 690 H180"/>
+      <path d="M0 830 H360"/>
+      <path d="M300 830 V740 H440"/>
+    </g>
+    <g fill="#0bb4ff" stroke="none" opacity="0.45">
+      <circle cx="420" cy="650" r="13"/><circle cx="180" cy="690" r="13"/>
+      <circle cx="360" cy="830" r="13"/><circle cx="440" cy="740" r="13"/>
+    </g>
+    <!-- faint mid traces -->
+    <g stroke="#ff8a3c" stroke-width="4" opacity="0.16">
+      <path d="M700 0 V90 H900"/>
+      <path d="M820 900 V800 H1020"/>
+    </g>
+    <g fill="#ffb347" stroke="none" opacity="0.2">
+      <circle cx="900" cy="90" r="9"/><circle cx="1020" cy="800" r="9"/>
+    </g>
+  </g>
+</svg>
