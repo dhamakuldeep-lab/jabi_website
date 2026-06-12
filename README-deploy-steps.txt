@@ -37,5 +37,6 @@ ENQUIRY FORM
 - For silent submit-to-inbox, a free Formspree account can be wired in.
 
 EDIT LATER
-- Add real university names and exact student numbers when ready.
-- Replace founder photo placeholder (KD initials) with a real photo if desired.
+- Add real university names and exact student numbers when ready- Replace founder photo placeholder (KD initials) with a real photo if desired.
+
+
