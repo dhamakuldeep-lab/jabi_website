@@ -17,13 +17,16 @@
     "#jbi{flex:1;background:#0a0e1a;border:1.5px solid #26304a;border-radius:10px;color:#eef2fb;padding:10px 12px;font-size:.92rem;font-family:inherit}",
     "#jbi:focus{outline:2px solid #00e0a4;border-color:#00e0a4}",
     "#jbs{background:linear-gradient(120deg,#00e0a4,#0bb4ff);border:0;border-radius:10px;color:#04121a;font-weight:800;padding:0 16px;cursor:pointer}",
+    "#jbmic{background:#1a2236;border:1.5px solid #26304a;border-radius:10px;font-size:1.1rem;padding:0 12px;cursor:pointer}",
+    "#jbmic.rec{background:#ff5d5d;border-color:#ff5d5d}",
+    "#jbh button{margin-left:10px}",
     "@media(max-width:560px){#jbt{right:16px;bottom:86px;padding:12px 18px}#jbp{right:8px;bottom:148px}}"
   ].join("\n");
   var st = document.createElement("style"); st.textContent = css; document.head.appendChild(st);
 
   var btn = document.createElement("button"); btn.id = "jbt"; btn.textContent = "🤖 Ask Jabi Guru";
   var panel = document.createElement("div"); panel.id = "jbp";
-  panel.innerHTML = '<div id="jbh"><span>Jabi Guru</span><button aria-label="Close">✕</button></div><div id="jbm"></div><div id="jbf"><input id="jbi" placeholder="Type your question here…" maxlength="500"><button id="jbs">Send</button></div>';
+  panel.innerHTML = '<div id="jbh"><span>Jabi Guru</span><span><button id="jbv" aria-label="Voice" title="Read replies aloud">🔇</button><button id="jbx" aria-label="Close">✕</button></span></div><div id="jbm"></div><div id="jbf"><input id="jbi" placeholder="Type your question here…" maxlength="500"><button id="jbmic" title="Speak your question">🎤</button><button id="jbs">Send</button></div>';
   document.body.appendChild(btn); document.body.appendChild(panel);
 
   var hist = [], busy = false;
@@ -42,7 +45,7 @@
     if (panel.classList.contains("open")) inp.focus();
   }
   btn.onclick = toggle;
-  panel.querySelector("#jbh button").onclick = toggle;
+  panel.querySelector("#jbx").onclick = toggle;
 
   function send() {
     var t = inp.value.trim();
@@ -55,7 +58,7 @@
       body: JSON.stringify({ messages: hist })
     }).then(function (r) { return r.json(); }).then(function (d) {
       var reply = (d.reply || "Sorry, something went wrong. Please try again.").replace(/\*\*/g, "");
-      wait.textContent = reply; hist.push({ role: "assistant", content: reply });
+      wait.textContent = reply; hist.push({ role: "assistant", content: reply }); speak(reply);
       wait.scrollIntoView({ block: "start", behavior: "auto" });
     }).catch(function () {
       wait.textContent = "Connection problem — please try again, or WhatsApp us at +91 96255 80114.";
@@ -63,4 +66,45 @@
   }
   panel.querySelector("#jbs").onclick = send;
   inp.addEventListener("keydown", function (e) { if (e.key === "Enter") send(); });
+
+  // --- Voice output (read replies aloud) ---
+  var voiceOn = false;
+  var vbtn = panel.querySelector("#jbv");
+  vbtn.onclick = function () {
+    voiceOn = !voiceOn;
+    vbtn.textContent = voiceOn ? "🔊" : "🔇";
+    if (!voiceOn && window.speechSynthesis) speechSynthesis.cancel();
+  };
+  function speak(text) {
+    if (!voiceOn || !window.speechSynthesis) return;
+    speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(text);
+    var voices = speechSynthesis.getVoices();
+    var hasDevanagari = /[\u0900-\u097F]/.test(text);
+    var pick = voices.find(function (v) { return hasDevanagari ? v.lang.indexOf("hi") === 0 : v.lang.indexOf("en-IN") === 0; }) ||
+               voices.find(function (v) { return v.lang.indexOf("en") === 0; });
+    if (pick) u.voice = pick;
+    u.rate = 1; speechSynthesis.speak(u);
+  }
+
+  // --- Voice input (mic) ---
+  var mic = panel.querySelector("#jbmic");
+  var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) { mic.style.display = "none"; }
+  else {
+    var rec = null, listening = false;
+    mic.onclick = function () {
+      if (listening) { rec.stop(); return; }
+      rec = new SR();
+      rec.lang = "en-IN"; rec.interimResults = false; rec.maxAlternatives = 1;
+      rec.onstart = function () { listening = true; mic.classList.add("rec"); inp.placeholder = "Listening…"; };
+      rec.onend = function () { listening = false; mic.classList.remove("rec"); inp.placeholder = "Type your question here…"; };
+      rec.onresult = function (e) {
+        var t = e.results[0][0].transcript;
+        inp.value = t; send();
+      };
+      rec.onerror = function () { listening = false; mic.classList.remove("rec"); inp.placeholder = "Mic not available — please type"; };
+      rec.start();
+    };
+  }
 })();
