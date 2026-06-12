@@ -16,15 +16,15 @@ img{max-width:100%}
 .grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 
 /* Nav */
-header{position:sticky;top:0;z-index:50;background:rgba(10,14,26,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #e3e7f0}
 nav{display:flex;align-items:center;justify-content:space-between;height:80px}
 .logo{font-size:1.3rem;font-weight:800;letter-spacing:-.02em}
 .logo span{color:var(--brand)}
-.navlinks{display:flex;gap:30px;font-size:.93rem;font-weight:600;color:var(--ink-soft)}
-.navlinks a:hover{color:var(--ink)}
+.navlinks{display:flex;gap:30px;font-size:.95rem;font-weight:700;color:#2b3a5c}
+.navlinks a:hover{color:#0bb4ff}
 .nav-cta{background:var(--grad);color:#04121a !important;padding:11px 20px;border-radius:10px;font-size:.9rem;font-weight:800}
 .nav-cta:hover{opacity:.9}
-.menu-btn{display:none;font-size:1.5rem;background:none;border:0;cursor:pointer;color:var(--ink)}
+.menu-btn{display:none;font-size:1.5rem;background:none;border:0;cursor:pointer;color:#1c2840}
 
 /* Buttons */
 .btn{padding:15px 30px;border-radius:11px;font-weight:800;font-size:.98rem;cursor:pointer;border:0;display:inline-block;transition:.18s}
@@ -166,11 +166,11 @@ footer a:hover{color:var(--brand)}
   /* Mobile dropdown nav */
   .navlinks{
     display:none;position:absolute;top:64px;left:0;right:0;
-    flex-direction:column;gap:0;background:var(--bg-2);
+    flex-direction:column;gap:0;background:#fff;
     border-bottom:1px solid var(--line);padding:8px 0;z-index:60;
   }
   .navlinks.open{display:flex}
-  .navlinks a{padding:14px 24px;border-bottom:1px solid var(--line);font-size:1rem}
+  .navlinks a{padding:14px 24px;border-bottom:1px solid #e8ecf4;font-size:1rem}
   .navlinks a:last-child{border-bottom:0}
   .hero{padding:56px 0 48px}
   .hero h1{font-size:2.1rem}
@@ -202,10 +202,10 @@ footer a:hover{color:var(--brand)}
 
 /* Real logo: full logo image (nav + footer same) */
 .logo{display:flex;align-items:center}
-.nav-logo-img{height:60px;width:auto;object-fit:contain;display:block;background:#fff;padding:8px 14px;border-radius:12px}
+.nav-logo-img{height:72px;width:auto;object-fit:contain;display:block}
 .footer-logo-img{height:76px;width:auto;background:#fff;padding:8px 14px;border-radius:12px;margin-bottom:14px}
-@media(max-width:900px){.nav-logo-img{height:50px;padding:6px 10px}}
-@media(max-width:560px){.nav-logo-img{height:44px;padding:5px 9px}}
+@media(max-width:900px){.nav-logo-img{height:56px}}
+@media(max-width:560px){.nav-logo-img{height:48px}}
 
 /* Products section */
 .products{padding:88px 0}
