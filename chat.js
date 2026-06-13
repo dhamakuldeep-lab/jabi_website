@@ -2,7 +2,7 @@
 (function () {
   var WORKER_URL = "https://jabi-ai.dhama-kuldeep.workers.dev";
   if (WORKER_URL.indexOf("REPLACE") === 0) return; // disabled until configured
-
+ 
   var css = [
     "#jbt{position:fixed;bottom:96px;right:24px;z-index:70;background:linear-gradient(120deg,#00e0a4,#0bb4ff);color:#04121a;border:0;border-radius:999px;padding:14px 22px;font-weight:800;font-size:.95rem;cursor:pointer;box-shadow:0 10px 30px -8px rgba(0,0,0,.6);font-family:'Segoe UI',system-ui,sans-serif}",
     "#jbp{position:fixed;bottom:162px;right:24px;z-index:71;width:360px;max-width:calc(100vw - 32px);height:480px;max-height:70vh;background:#0f1525;border:1px solid #26304a;border-radius:18px;display:none;flex-direction:column;overflow:hidden;box-shadow:0 24px 60px -20px rgba(0,0,0,.8);font-family:'Segoe UI',system-ui,sans-serif}",
@@ -20,18 +20,19 @@
     "#jbmic{background:#1a2236;border:1.5px solid #26304a;border-radius:10px;font-size:1.1rem;padding:0 12px;cursor:pointer}",
     "#jbmic.rec{background:#ff5d5d;border-color:#ff5d5d}",
     "#jbh button{margin-left:10px}",
+    "#jbv{font-size:.82rem;display:inline-flex;align-items:center;gap:3px}",
     "@media(max-width:560px){#jbt{right:16px;bottom:86px;padding:12px 18px}#jbp{right:8px;bottom:148px}}"
   ].join("\n");
   var st = document.createElement("style"); st.textContent = css; document.head.appendChild(st);
-
+ 
   var btn = document.createElement("button"); btn.id = "jbt"; btn.textContent = "🤖 Ask Jabi Guru";
   var panel = document.createElement("div"); panel.id = "jbp";
-  panel.innerHTML = '<div id="jbh"><span>Jabi Guru</span><span><button id="jbv" aria-label="Voice" title="Read replies aloud">🔇</button><button id="jbx" aria-label="Close">✕</button></span></div><div id="jbm"></div><div id="jbf"><input id="jbi" placeholder="Type your question here…" maxlength="500"><button id="jbmic" title="Speak your question">🎤</button><button id="jbs">Send</button></div>';
+  panel.innerHTML = '<div id="jbh"><span>Jabi Guru</span><span><button id="jbv" aria-label="Turn voice replies on or off" title="Read replies aloud">🔇 Voice</button><button id="jbx" aria-label="Close">✕</button></span></div><div id="jbm"></div><div id="jbf"><input id="jbi" placeholder="Type here, or tap 🎤 to speak" maxlength="500"><button id="jbmic" title="Tap to speak" aria-label="Tap to speak">🎤</button><button id="jbs">Send</button></div>';
   document.body.appendChild(btn); document.body.appendChild(panel);
-
+ 
   var hist = [], busy = false;
   var box = panel.querySelector("#jbm"), inp = panel.querySelector("#jbi");
-
+ 
   function add(role, text) {
     var d = document.createElement("div");
     d.className = "jb-msg " + (role === "user" ? "jb-me" : "jb-ai");
@@ -41,12 +42,13 @@
     panel.classList.toggle("open");
     if (panel.classList.contains("open") && !hist.length) {
       add("assistant", "Namaste! I'm Jabi Guru, your AI guide. Ask me anything about our AI workshops, internships, FDPs or how to book one for your campus or team.");
+      add("assistant", "💬 Type your question below, or tap the 🎤 mic to speak. Tap the “🔇 Voice” button at the top if you'd like to hear my replies aloud.");
     }
     if (panel.classList.contains("open")) inp.focus();
   }
   btn.onclick = toggle;
   panel.querySelector("#jbx").onclick = toggle;
-
+ 
   function send() {
     var t = inp.value.trim();
     if (!t || busy) return;
@@ -66,13 +68,13 @@
   }
   panel.querySelector("#jbs").onclick = send;
   inp.addEventListener("keydown", function (e) { if (e.key === "Enter") send(); });
-
+ 
   // --- Voice output (read replies aloud) ---
   var voiceOn = false;
   var vbtn = panel.querySelector("#jbv");
   vbtn.onclick = function () {
     voiceOn = !voiceOn;
-    vbtn.textContent = voiceOn ? "🔊" : "🔇";
+    vbtn.textContent = voiceOn ? "🔊 Voice" : "🔇 Voice";
     if (!voiceOn && window.speechSynthesis) speechSynthesis.cancel();
   };
   function speak(text) {
@@ -94,7 +96,7 @@
     if (pick) u.voice = pick;
     u.rate = 1; u.pitch = 1.05; speechSynthesis.speak(u);
   }
-
+ 
   // --- Voice input (mic) ---
   var mic = panel.querySelector("#jbmic");
   var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -106,7 +108,7 @@
       rec = new SR();
       rec.lang = "en-IN"; rec.interimResults = false; rec.maxAlternatives = 1;
       rec.onstart = function () { listening = true; mic.classList.add("rec"); inp.placeholder = "Listening…"; };
-      rec.onend = function () { listening = false; mic.classList.remove("rec"); inp.placeholder = "Type your question here…"; };
+      rec.onend = function () { listening = false; mic.classList.remove("rec"); inp.placeholder = "Type here, or tap 🎤 to speak"; };
       rec.onresult = function (e) {
         var t = e.results[0][0].transcript;
         inp.value = t; send();
@@ -116,3 +118,4 @@
     };
   }
 })();
+ 
